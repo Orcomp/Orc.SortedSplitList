@@ -1,0 +1,50 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.SortedSplitList", "Orc.SortedSplitList\Orc.SortedSplitList.csproj", "{1F6BD8FC-E883-4C0F-BFED-25841BFDE19E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.SortedSplitList.Test", "Orc.SortedSplitList.Test\Orc.SortedSplitList.Test.csproj", "{12973EC4-236A-44C2-8D38-8AF850D52CE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orc.SortedSplitList.PerformanceTest", "Orc.SortedSplitList.PerformanceTest\Orc.SortedSplitList.PerformanceTest.csproj", "{1C1FA60C-2B8C-4048-A6DE-943F67B6C7AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{D9B902BD-37F9-46A9-886D-C59C3C6790AE}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+		Orc.SortedSplitList\Orc.SortedSplitList.csproj.DotSettings = Orc.SortedSplitList\Orc.SortedSplitList.csproj.DotSettings
+		Orc.SortedSplitList.sln.DotSettings = Orc.SortedSplitList.sln.DotSettings
+		Orc.SortedSplitList.Test\Orc.SortedSplitList.Test.csproj.DotSettings = Orc.SortedSplitList.Test\Orc.SortedSplitList.Test.csproj.DotSettings
+		Settings.StyleCop = Settings.StyleCop
+		SolutionAssemblyInfo.cs = SolutionAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EEF0D129-B70C-4A38-AB93-A8F74C19B2C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F6BD8FC-E883-4C0F-BFED-25841BFDE19E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F6BD8FC-E883-4C0F-BFED-25841BFDE19E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F6BD8FC-E883-4C0F-BFED-25841BFDE19E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F6BD8FC-E883-4C0F-BFED-25841BFDE19E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12973EC4-236A-44C2-8D38-8AF850D52CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12973EC4-236A-44C2-8D38-8AF850D52CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12973EC4-236A-44C2-8D38-8AF850D52CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12973EC4-236A-44C2-8D38-8AF850D52CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C1FA60C-2B8C-4048-A6DE-943F67B6C7AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C1FA60C-2B8C-4048-A6DE-943F67B6C7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C1FA60C-2B8C-4048-A6DE-943F67B6C7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C1FA60C-2B8C-4048-A6DE-943F67B6C7AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1F6BD8FC-E883-4C0F-BFED-25841BFDE19E} = {EEF0D129-B70C-4A38-AB93-A8F74C19B2C2}
+		{12973EC4-236A-44C2-8D38-8AF850D52CE5} = {EEF0D129-B70C-4A38-AB93-A8F74C19B2C2}
+		{1C1FA60C-2B8C-4048-A6DE-943F67B6C7AF} = {EEF0D129-B70C-4A38-AB93-A8F74C19B2C2}
+	EndGlobalSection
+EndGlobal
