@@ -19,10 +19,18 @@ For performance testing and visualizing results this project uses NunitBenchmark
 ## Implementations under test
 
 - **SortedSplitList** - This code was taken from article: "SortedSplitList - An Indexing Algorithm in C#" by Aurelien Boudoux. See code for more details
-- **SortedList** - Taken from Orcomp other internal project 'Stockpile' 
-- **SortedList** - .NET Framework 
+- **SortedList** - Our own implementation
+- **DotNetSortedList** - .NET Framework 
 - **C5 SortedArray** - C5's sorted array
 
+## Notes
+
+- All others than the CodeProject SortedSplitList perform almost identical for write operations (Add/Remove). This is because their implementations are very similar: using internally an array.
+- The CodeProject SortedSplitList is significantly better. For greater numbers like million the performancy degardation of the other 3 is significant.
+- For read operations the CodeProject SortedSplitList performs a bit slower. The difference is approx 1.2 - 2x factor.
+- .NET SortedList search method (IndexOfKey(...)) returns -1 in case of not found, instead of the first greater index binary complement. No wrapper or extension method can help this.
+- C5's SortedArray's Find() also does not return information in case of not found, however maybe Range(...) can be used.
+- Both C5's SortedArray and CodeProject's SortedSplitList can't store key/value pairs.
 
 ## Planned
 
