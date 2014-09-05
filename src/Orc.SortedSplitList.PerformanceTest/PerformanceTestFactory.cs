@@ -55,6 +55,7 @@ namespace Orc.SortedSplitList.PerformanceTest
 			       let run = new Action<IPerformanceTestCaseConfiguration>(c =>
 			       {
 				       var config = (TestConfiguration) c;
+					   config.Target = CreateTarget<DateTime, long>(implementationType);
 				       for (var i = 0; i < size; i++)
 				       {
 					       config.Target.Add(config.RandomDateTimes[i], config.RandomLongs[i]);
@@ -144,22 +145,22 @@ namespace Orc.SortedSplitList.PerformanceTest
 				config.RandomLongs[i] = permutation[i];
 				config.RandomDateTimes[i] = new DateTime(_offset + permutation[i]);
 			}
-
-			config.Target = CreateTarget<DateTime, long>(type);
 		}
 
 		private void PrepareRemove(int size, Type type, TestConfiguration config)
 		{
-			// Do not generate in random order to speed up test preparation
+			// Do not generate in random order to speed up Add operation (test preparation)
 			PrepareSearch(size, type, config);
 
 			// Regenerate a random order for removal:
 			config.RandomLongs = new long[size];
 			config.RandomDateTimes = new DateTime[size];
+			var permutation = Randomize(GetZeroToN(size)).ToArray();
+			
 			for (var i = 0; i < size; i++)
 			{
-				config.RandomLongs[i] = i;
-				config.RandomDateTimes[i] = new DateTime(_offset + i);
+				config.RandomLongs[i] = permutation[i];
+				config.RandomDateTimes[i] = new DateTime(_offset + permutation[i]);
 			}
 		}
 
