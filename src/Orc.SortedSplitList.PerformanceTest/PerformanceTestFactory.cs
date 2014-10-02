@@ -12,6 +12,8 @@ namespace Orc.SortedSplitList.PerformanceTest
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using C5;
+	using DotNet;
 	using NUnitBenchmarker;
 	using NUnitBenchmarker.Configuration;
 
@@ -21,19 +23,23 @@ namespace Orc.SortedSplitList.PerformanceTest
 	{
 		#region Fields
 		private readonly Random _random = new Random(0);
-		private long _offset = new DateTime(2000, 1, 1).Ticks;
+		private readonly long _offset = new DateTime(2000, 1, 1).Ticks;
 		#endregion
 
 		#region Properties
 		private IEnumerable<Type> ImplementationTypes
 		{
-			get { return new[]
+			get
 			{
-				typeof (WrappedSortedSplitList<DateTime, long>),
-				typeof (WrappedSortedList<DateTime, long>),
-				typeof (WrappedDotNetSortedList<DateTime, long>),
-				typeof (WrappedSortedArray<DateTime, long>),
-			}; }
+				IList<int> x;
+				return new[]
+				{
+					typeof (SplitListSortedDictionary<DateTime, long>),
+					typeof (SimpleSortedListSortedDictionary<DateTime, long>),
+					typeof (SortedListSortedDictionary<DateTime, long>),
+					typeof (SortedArraySortedDictionary<DateTime, long>)
+				};
+			}
 		}
 
 		private static IEnumerable<int> Sizes
@@ -55,7 +61,7 @@ namespace Orc.SortedSplitList.PerformanceTest
 			       let run = new Action<IPerformanceTestCaseConfiguration>(c =>
 			       {
 				       var config = (TestConfiguration) c;
-					   config.Target = CreateTarget<DateTime, long>(implementationType);
+				       config.Target = CreateTarget<DateTime, long>(implementationType);
 				       for (var i = 0; i < size; i++)
 				       {
 					       config.Target.Add(config.RandomDateTimes[i], config.RandomLongs[i]);
@@ -70,68 +76,68 @@ namespace Orc.SortedSplitList.PerformanceTest
 				       Prepare = prepare,
 				       Run = run,
 				       IsReusable = true,
-					   Divider = size
+				       Divider = size
 			       };
 		}
 
 		private IEnumerable<TestConfiguration> RemoveTestCases()
 		{
 			return from implementationType in ImplementationTypes
-				   from size in Sizes
-				   let prepare = new Action<IPerformanceTestCaseConfiguration>(c =>
-				   {
-					   var config = (TestConfiguration)c;
-					   PrepareRemove(size, implementationType, config);
-				   })
-				   let run = new Action<IPerformanceTestCaseConfiguration>(c =>
-				   {
-					   var config = (TestConfiguration)c;
-					   for (var i = 0; i < size; i++)
-					   {
-						   config.Target.Remove(config.RandomDateTimes[i], config.RandomLongs[i]);
-					   }
-				   })
-				   select new TestConfiguration
-				   {
-					   TestName = "Remove",
-					   TargetImplementationType = implementationType,
-					   Identifier = string.Format("{0}", implementationType.GetFriendlyName()),
-					   Size = size,
-					   Prepare = prepare,
-					   Run = run,
-					   IsReusable = false,
-					   Divider = size
-				   };
+			       from size in Sizes
+			       let prepare = new Action<IPerformanceTestCaseConfiguration>(c =>
+			       {
+				       var config = (TestConfiguration) c;
+				       PrepareRemove(size, implementationType, config);
+			       })
+			       let run = new Action<IPerformanceTestCaseConfiguration>(c =>
+			       {
+				       var config = (TestConfiguration) c;
+				       for (var i = 0; i < size; i++)
+				       {
+					       config.Target.Remove(config.RandomDateTimes[i], config.RandomLongs[i]);
+				       }
+			       })
+			       select new TestConfiguration
+			       {
+				       TestName = "Remove",
+				       TargetImplementationType = implementationType,
+				       Identifier = string.Format("{0}", implementationType.GetFriendlyName()),
+				       Size = size,
+				       Prepare = prepare,
+				       Run = run,
+				       IsReusable = false,
+				       Divider = size
+			       };
 		}
 
 		private IEnumerable<TestConfiguration> SearchTestCases()
 		{
 			return from implementationType in ImplementationTypes
-				   from size in Sizes
-				   let prepare = new Action<IPerformanceTestCaseConfiguration>(c =>
-				   {
-					   var config = (TestConfiguration)c;
-					   PrepareSearch(size, implementationType, config);
-				   })
-				   let run = new Action<IPerformanceTestCaseConfiguration>(c =>
-				   {
-					   var config = (TestConfiguration)c;
-					   for (var i = 0; i < size; i++)
-					   {
-						   config.Target.BinarySearch(config.RandomDateTimes[i]);
-					   }
-				   })
-				   select new TestConfiguration
-				   {
-					   TestName = "Binary Search",
-					   TargetImplementationType = implementationType,
-					   Identifier = string.Format("{0}", implementationType.GetFriendlyName()),
-					   Size = size,
-					   Prepare = prepare,
-					   Run = run,
-					   IsReusable = true,
-					   Divider = size
-				   };
+			       from size in Sizes
+			       let prepare = new Action<IPerformanceTestCaseConfiguration>(c =>
+			       {
+				       var config = (TestConfiguration) c;
+				       PrepareSearch(size, implementationType, config);
+			       })
+			       let run = new Action<IPerformanceTestCaseConfiguration>(c =>
+			       {
+				       var config = (TestConfiguration) c;
+				       for (var i = 0; i < size; i++)
+				       {
+					       config.Target.BinarySearch(config.RandomDateTimes[i]);
+				       }
+			       })
+			       select new TestConfiguration
+			       {
+				       TestName = "Binary Search",
+				       TargetImplementationType = implementationType,
+				       Identifier = string.Format("{0}", implementationType.GetFriendlyName()),
+				       Size = size,
+				       Prepare = prepare,
+				       Run = run,
+				       IsReusable = true,
+				       Divider = size
+			       };
 		}
 
 		private void PrepareAdd(int size, Type type, TestConfiguration config)
@@ -156,15 +162,13 @@ namespace Orc.SortedSplitList.PerformanceTest
 			config.RandomLongs = new long[size];
 			config.RandomDateTimes = new DateTime[size];
 			var permutation = Randomize(GetZeroToN(size)).ToArray();
-			
+
 			for (var i = 0; i < size; i++)
 			{
 				config.RandomLongs[i] = permutation[i];
 				config.RandomDateTimes[i] = new DateTime(_offset + permutation[i]);
 			}
 		}
-
-
 
 		private void PrepareSearch(int size, Type type, TestConfiguration config)
 		{
@@ -179,7 +183,6 @@ namespace Orc.SortedSplitList.PerformanceTest
 				config.Target.Add(new DateTime(_offset + i), i);
 			}
 		}
-
 
 		private IEnumerable<int> GetZeroToN(int n)
 		{
@@ -196,9 +199,9 @@ namespace Orc.SortedSplitList.PerformanceTest
 			        select kvp.Value).ToArray();
 		}
 
-		public ITestOperations<TSorter, TValue> CreateTarget<TSorter, TValue>(Type type)
+		public ISortedDictionary<TSorter, TValue> CreateTarget<TSorter, TValue>(Type type)
 		{
-			return (ITestOperations<TSorter, TValue>) type
+			return (ISortedDictionary<TSorter, TValue>) type
 				.GetConstructors().First(ci => !ci.GetParameters().Any()).Invoke(new object[0]);
 		}
 		#endregion

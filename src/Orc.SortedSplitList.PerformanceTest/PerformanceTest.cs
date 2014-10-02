@@ -32,7 +32,7 @@ namespace Orc.SortedSplitList.PerformanceTest
 			config.Benchmark(config.TestName, config.Size, 1);
 		}
 
-		[Test, TestCaseSource(typeof(PerformanceTestFactory), "RemoveTestCases")]
+		[Test, TestCaseSource(typeof (PerformanceTestFactory), "RemoveTestCases")]
 		public void Remove(TestConfiguration config)
 		{
 			// About count = 1: There is no need to execute the tests multiple times
@@ -41,7 +41,7 @@ namespace Orc.SortedSplitList.PerformanceTest
 			config.Benchmark(config.TestName, config.Size, 1);
 		}
 
-		[Test, TestCaseSource(typeof(PerformanceTestFactory), "SearchTestCases")]
+		[Test, TestCaseSource(typeof (PerformanceTestFactory), "SearchTestCases")]
 		public void Search(TestConfiguration config)
 		{
 			// About count = 1: There is no need to execute the tests multiple times

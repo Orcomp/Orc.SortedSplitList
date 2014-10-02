@@ -19,7 +19,7 @@ namespace Orc.SortedSplitList.PerformanceTest
 		#region Properties
 		public int Size { get; set; }
 		public string TestName { get; set; }
-		public ITestOperations<DateTime, long> Target { get; set; }
+		public ISortedDictionary<DateTime, long> Target { get; set; }
 		public long[] RandomLongs { get; set; }
 		public DateTime[] RandomDateTimes { get; set; }
 		#endregion

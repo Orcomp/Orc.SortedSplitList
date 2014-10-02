@@ -1,6 +1,6 @@
 ﻿#region Copyright (c) 2014 Orcomp development team.
 // -------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnitTest1.cs" company="Orcomp development team">
+// <copyright file="SortedSplitListTest.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ namespace Orc.SortedSplitList.Test
 	#endregion
 
 	[TestFixture]
-	public class UnitTest1
+	public class SortedSplitListTest
 	{
 		private static SortedSplitList<TestObject> GetSortedSplitListSortedById()
 		{

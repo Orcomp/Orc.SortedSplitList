@@ -1,6 +1,6 @@
 ﻿#region Copyright (c) 2014 Orcomp development team.
 // -------------------------------------------------------------------------------------------------------------------
-// <copyright file="WrappedSortedSplitList.cs" company="Orcomp development team">
+// <copyright file="SplitListSortedDictionary.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -9,30 +9,31 @@
 namespace Orc.SortedSplitList
 {
 	#region using...
+	using System.Collections;
 	using System.Collections.Generic;
-	using C5;
+	using System.Linq;
 
 	#endregion
 
-	public class WrappedSortedArray<TSorter, TValue> : ITestOperations<TSorter, TValue>
+	public class SplitListSortedDictionary<TSorter, TValue> : ISortedDictionary<TSorter, TValue>
 	{
 		#region Fields
-		private readonly SortedArray<SimplestKeyValuePair> _s;
+		private readonly SortedSplitList<SimplestKeyValuePair> _sortedSplitList;
 		private readonly TValue _dummyValue;
 		#endregion
 
 		#region Constructors
-		public WrappedSortedArray()
+		public SplitListSortedDictionary()
 		{
-			_s = new SortedArray<SimplestKeyValuePair>(new SimplestKeyValuePairComparer());
+			_sortedSplitList = new SortedSplitList<SimplestKeyValuePair>(new SimplestKeyValuePairComparer());
 			_dummyValue = default(TValue);
 		}
 		#endregion
 
-		#region ITestOperations<TSorter,TValue> Members
+		#region ISortedDictionary<TSorter,TValue> Members
 		public int Count
 		{
-			get { return _s.Count; }
+			get { return _sortedSplitList.Count; }
 		}
 
 		public void Add(TSorter key, TValue value)
@@ -40,7 +41,7 @@ namespace Orc.SortedSplitList
 			SimplestKeyValuePair kvp;
 			kvp.Sorter = key;
 			kvp.Value = value;
-			_s.Add(kvp);
+			_sortedSplitList.Add(kvp);
 		}
 
 		public bool Remove(TSorter key, TValue value)
@@ -48,8 +49,24 @@ namespace Orc.SortedSplitList
 			SimplestKeyValuePair kvp;
 			kvp.Sorter = key;
 			kvp.Value = value;
-			_s.Remove(kvp);
-			return true;
+
+			// Performance tested: There is no measurable performance overhead:
+			var index = BinarySearch(key);
+			if (index < 0)
+			{
+				return false;
+			}
+
+			while (_sortedSplitList[index].Sorter.Equals(key))
+			{
+				if (Equals(_sortedSplitList[index].Value, value))
+				{
+					_sortedSplitList.Remove(kvp);
+					return true;
+				}
+				index++;
+			}
+			return false;
 		}
 
 		public int BinarySearch(TSorter key)
@@ -57,12 +74,39 @@ namespace Orc.SortedSplitList
 			SimplestKeyValuePair kvp;
 			kvp.Sorter = key;
 			kvp.Value = _dummyValue;
-			return _s.IndexOf(kvp);
+			return _sortedSplitList.BinarySearch(kvp);
 		}
 
+		public bool IsAdvancedBinarySearchSupported
+		{
+			get { return true; }
+		}
+
+		public void Clear()
+		{
+			_sortedSplitList.Clear();
+		}
+
+		TValue ISortedDictionary<TSorter, TValue>.this[int index]
+		{
+			get { return _sortedSplitList[index].Value; }
+		}
+
+		public IEnumerator<TValue> GetEnumerator()
+		{
+			return _sortedSplitList.Select(keyValuePair => keyValuePair.Value).GetEnumerator();
+		}
+
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
+		}
+		#endregion
+
+		#region Methods
 		public TValue Item(int index)
 		{
-			return _s[index].Value;
+			return _sortedSplitList[index].Value;
 		}
 		#endregion
 
@@ -83,7 +127,7 @@ namespace Orc.SortedSplitList
 			private static IComparer<TSorter> _comparer = Comparer<TSorter>.Default;
 			#endregion
 
-			#region IComparer<WrappedSortedSplitList<TSorter,TValue>.SimplestKeyValuePair> Members
+			#region IComparer<SplitListSortedDictionary<TSorter,TValue>.SimplestKeyValuePair> Members
 			public int Compare(SimplestKeyValuePair x, SimplestKeyValuePair y)
 			{
 				return _comparer.Compare(x.Sorter, y.Sorter);

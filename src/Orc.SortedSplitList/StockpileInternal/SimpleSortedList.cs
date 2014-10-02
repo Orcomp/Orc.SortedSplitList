@@ -1,6 +1,6 @@
 ﻿#region Copyright (c) 2014 Orcomp development team.
 // -------------------------------------------------------------------------------------------------------------------
-// <copyright file="SortedList.cs" company="Orcomp development team">
+// <copyright file="SimpleSortedList.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -14,22 +14,22 @@ namespace Orc.SortedSplitList
 
 	#endregion
 
-	public class SortedList<TSorter, TValue>
+	public class SimpleSortedList<TSorter, TValue>
 	{
 		#region Fields
-		private readonly IComparer<TSorter> comparer;
+		private readonly IComparer<TSorter> _comparer;
 		private TSorter[] _keys;
 		private TValue[] _values;
 		private int _count;
 		#endregion
 
 		#region Constructors
-		public SortedList()
+		public SimpleSortedList()
 		{
 			_keys = new TSorter[0];
 			_values = new TValue[0];
 			_count = 0;
-			comparer = Comparer<TSorter>.Default;
+			_comparer = Comparer<TSorter>.Default;
 		}
 		#endregion
 
@@ -126,12 +126,12 @@ namespace Orc.SortedSplitList
 				highIndex = ~highIndex - 1;
 			}
 
-			if (!lowIncluded && lowIndex < Count && comparer.Compare(low, _keys[lowIndex]) == 0)
+			if (!lowIncluded && lowIndex < Count && _comparer.Compare(low, _keys[lowIndex]) == 0)
 			{
 				lowIndex++;
 			}
 
-			if (!highIncluded && highIndex >= 0 && highIndex < Count && comparer.Compare(high, _keys[highIndex]) == 0)
+			if (!highIncluded && highIndex >= 0 && highIndex < Count && _comparer.Compare(high, _keys[highIndex]) == 0)
 			{
 				highIndex--;
 			}
@@ -144,7 +144,7 @@ namespace Orc.SortedSplitList
 
 		public void Add(TSorter key, TValue value)
 		{
-			var i = Array.BinarySearch(_keys, 0, _count, key, comparer);
+			var i = Array.BinarySearch(_keys, 0, _count, key, _comparer);
 			if (i >= 0)
 			{
 				throw new ArgumentException("Duplicate keys are not allowed");
@@ -152,14 +152,24 @@ namespace Orc.SortedSplitList
 			Insert(~i, key, value);
 		}
 
-		public bool Remove(TSorter key)
+		public bool Remove(TSorter key, TValue value)
 		{
-			var i = BinarySearch(key);
-			if (i >= 0)
+			var index = BinarySearch(key);
+			if (index < 0)
 			{
-				RemoveAt(i);
+				return false;
 			}
-			return i >= 0;
+
+			while (Keys[index].Equals(key))
+			{
+				if (Equals(Values[index], value))
+				{
+					RemoveAt(index);
+					return true;
+				}
+				index++;
+			}
+			return false;
 		}
 
 		public int BinarySearch(TSorter key)
@@ -169,7 +179,7 @@ namespace Orc.SortedSplitList
 				throw new ArgumentNullException("key");
 			}
 			// That's is point: Do not swallow the informantion of the negative value.
-			return Array.BinarySearch(_keys, 0, _count, key, comparer);
+			return Array.BinarySearch(_keys, 0, _count, key, _comparer);
 		}
 
 		private void Insert(int index, TSorter key, TValue value)
@@ -202,6 +212,13 @@ namespace Orc.SortedSplitList
 			}
 			_keys[_count] = default(TSorter);
 			_values[_count] = default(TValue);
+		}
+
+		public void Clear()
+		{
+			_keys = new TSorter[0];
+			_values = new TValue[0];
+			_count = 0;
 		}
 		#endregion
 	}

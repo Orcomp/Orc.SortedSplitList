@@ -46,14 +46,14 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="C5\WrappedSortedSplitList.cs" />
+    <Compile Include="C5\SortedArraySortedDictionary.cs" />
     <Compile Include="CodeProject\SortedSplitList.cs" />
-    <Compile Include="DotNet\WrappedDotNetSortedtList.cs" />
-    <Compile Include="StockpileInternal\WrappedSortedtList.cs" />
-    <Compile Include="CodeProject\WrappedSortedSplitList.cs" />
-    <Compile Include="ITestOperations.cs" />
+    <Compile Include="DotNet\SortedListSortedDictionary.cs" />
+    <Compile Include="StockpileInternal\SimpleSortedListSortedDictionary.cs" />
+    <Compile Include="CodeProject\SplitListSortedDictionary.cs" />
+    <Compile Include="Interface\ISortedDictionary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StockpileInternal\SortedList.cs" />
+    <Compile Include="StockpileInternal\SimpleSortedList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

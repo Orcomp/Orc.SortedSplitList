@@ -40,6 +40,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\C5.Intervals.0.2.0-unstable0011\lib\portable-net4+sl4+wp7+win8+wpa81+MonoAndroid14+MonoTouch40\C5.Intervals.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v14.1, Version=14.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -54,8 +56,13 @@
     <Compile Include="CodeProject\CompareByDateId.cs" />
     <Compile Include="CodeProject\CompareById.cs" />
     <Compile Include="CodeProject\TestObject.cs" />
-    <Compile Include="CodeProject\UnitTest1.cs" />
+    <Compile Include="CodeProject\SortedSplitListTest.cs" />
+    <Compile Include="Implementations\SimpleSortedListSortedDictionaryTest.cs" />
+    <Compile Include="Implementations\SortedArraySortedDictionaryTest.cs" />
+    <Compile Include="Interface\SortedDictionaryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Implementations\SortedListSortedDictionaryTest.cs" />
+    <Compile Include="Implementations\SplitListSortedDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Orc.SortedSplitList\Orc.SortedSplitList.csproj">
