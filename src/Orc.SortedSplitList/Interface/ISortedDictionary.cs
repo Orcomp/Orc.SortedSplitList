@@ -13,6 +13,12 @@ namespace Orc.SortedSplitList
 
 	#endregion
 
+	/// <summary>
+	/// Interface ISortedDictionary
+	/// Defines methods to manipulate generic sorted lists / dictionaries.
+	/// </summary>
+	/// <typeparam name="TSorter">The type of the sorter key. Elements will be enumerably and binary searchable by this key.</typeparam>
+	/// <typeparam name="TValue">The type of the value associated with each key.</typeparam>
 	public interface ISortedDictionary<in TSorter, TValue> : IEnumerable<TValue>
 	{
 		#region Properties
