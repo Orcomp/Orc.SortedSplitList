@@ -46,9 +46,12 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="C5\SortedArraySortedList.cs" />
     <Compile Include="C5\SortedArraySortedDictionary.cs" />
     <Compile Include="CodeProject\SortedSplitList.cs" />
+    <Compile Include="CodeProject\SplitSortedList.cs" />
     <Compile Include="DotNet\SortedListSortedDictionary.cs" />
+    <Compile Include="Interface\ISortedList.cs" />
     <Compile Include="StockpileInternal\SimpleSortedListSortedDictionary.cs" />
     <Compile Include="CodeProject\SplitListSortedDictionary.cs" />
     <Compile Include="Interface\ISortedDictionary.cs" />

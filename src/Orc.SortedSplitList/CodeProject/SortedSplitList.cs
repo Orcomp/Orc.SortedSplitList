@@ -1,34 +1,16 @@
-﻿#region Copyright (c) 2014 Orcomp development team.
-// -------------------------------------------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="SortedSplitList.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-#endregion
-
-//
-// This code was taken from article: "SortedSplitList - An Indexing Algorithm in C#" by Aurelien Boudoux
-// CodeProject: http://www.codeproject.com/Articles/610399/SortedSplitList-An-Indexing-Algorithm-in-Csharp
-//
-// Original header was:
-/* [06/06/2013]
-* 
-* SortedSplitList, by Aurélien BOUDOUX.
-* Blog : http://aurelien.boudoux.fr
-* Twitter : @AurelienBoudoux
-* 
-*/
 
 namespace Orc.SortedSplitList
 {
-	#region using...
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Data;
 	using System.Linq;
-
-	#endregion
 
 	public class SortedSplitList<T> : IEnumerable<T>
 	{

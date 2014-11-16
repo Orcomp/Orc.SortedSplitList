@@ -1,14 +1,11 @@
-﻿#region Copyright (c) 2014 Orcomp development team.
-// -------------------------------------------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="PerformanceTestFactory.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-#endregion
 
 namespace Orc.SortedSplitList.PerformanceTest
 {
-	#region using...
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -16,8 +13,6 @@ namespace Orc.SortedSplitList.PerformanceTest
 	using DotNet;
 	using NUnitBenchmarker;
 	using NUnitBenchmarker.Configuration;
-
-	#endregion
 
 	public class PerformanceTestFactory
 	{

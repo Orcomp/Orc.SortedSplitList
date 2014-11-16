@@ -1,18 +1,13 @@
-﻿#region Copyright (c) 2014 Orcomp development team.
-// -------------------------------------------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="SimpleSortedList.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-#endregion
 
 namespace Orc.SortedSplitList
 {
-	#region using...
 	using System;
 	using System.Collections.Generic;
-
-	#endregion
 
 	public class SimpleSortedList<TSorter, TValue>
 	{

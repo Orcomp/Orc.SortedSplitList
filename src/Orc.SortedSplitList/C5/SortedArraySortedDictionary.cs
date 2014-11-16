@@ -1,19 +1,14 @@
-﻿#region Copyright (c) 2014 Orcomp development team.
-// -------------------------------------------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="SortedArraySortedDictionary.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-#endregion
 
 namespace Orc.SortedSplitList.C5
 {
-	#region using...
 	using System.Collections;
 	using System.Collections.Generic;
 	using global::C5;
-
-	#endregion
 
 	public class SortedArraySortedDictionary<TSorter, TValue> : global::Orc.SortedSplitList.ISortedDictionary<TSorter, TValue>
 	{

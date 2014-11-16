@@ -1,26 +1,14 @@
-﻿#region Copyright (c) 2014 Orcomp development team.
-// -------------------------------------------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="SortedListSortedDictionary.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-#endregion
 
 namespace Orc.SortedSplitList.DotNet
 {
-	#region using...
 	using System.Collections;
-	using System.Linq;
-
-	#region using...
 	using System.Collections.Generic;
-
-	#endregion
-
-	#endregion
-
-	#region using...
-	#endregion
+	using System.Linq;
 
 	public class SortedListSortedDictionary<TSorter, TValue> : ISortedDictionary<TSorter, TValue>
 	{

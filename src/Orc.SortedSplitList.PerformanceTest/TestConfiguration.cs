@@ -1,18 +1,13 @@
-﻿#region Copyright (c) 2014 Orcomp development team.
-// -------------------------------------------------------------------------------------------------------------------
+﻿// -------------------------------------------------------------------------------------------------------------------
 // <copyright file="TestConfiguration.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-#endregion
 
 namespace Orc.SortedSplitList.PerformanceTest
 {
-	#region using...
 	using System;
 	using NUnitBenchmarker.Configuration;
-
-	#endregion
 
 	public class TestConfiguration : PerformanceTestCaseConfigurationBase
 	{

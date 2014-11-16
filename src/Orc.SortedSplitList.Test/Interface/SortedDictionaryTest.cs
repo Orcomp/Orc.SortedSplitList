@@ -1,19 +1,14 @@
-#region Copyright (c) 2014 Orcomp development team.
 // -------------------------------------------------------------------------------------------------------------------
 // <copyright file="SortedDictionaryTest.cs" company="Orcomp development team">
 //   Copyright (c) 2014 Orcomp development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-#endregion
 
 namespace Orc.SortedSplitList.Test.Interface
 {
-	#region using...
 	using System;
 	using System.Linq;
 	using NUnit.Framework;
-
-	#endregion
 
 	[TestFixture]
 	[Explicit]
