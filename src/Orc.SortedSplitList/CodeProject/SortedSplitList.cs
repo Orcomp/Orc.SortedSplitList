@@ -90,6 +90,36 @@ namespace Orc.SortedSplitList
 			_isDirty = true;
 		}
 
+		public void RemoveAt(int index)
+		{
+			var deletedNode = false;
+			var vi = GetHorizontalTable(this[index], -1, null);
+			var currentTable = _verticalIndex[vi].List;
+
+				currentTable.RemoveAt(index);
+
+				if (currentTable.Count == 0)
+				{
+					_verticalIndex.RemoveAt(vi);
+					deletedNode = true;
+				}
+				else if (vi > 0 && (_verticalIndex[vi - 1].List.Count + currentTable.Count) < _deepness)
+				{
+					_verticalIndex[vi - 1].List.AddRange(currentTable);
+					currentTable.Clear();
+					_verticalIndex.RemoveAt(vi);
+					deletedNode = true;
+				}
+
+				if (deletedNode == false && index == 0)
+				{
+					_verticalIndex[vi].FirstItem = _verticalIndex[vi].List[0];
+				}
+
+				_count--;
+				_isDirty = true;
+		}
+
 		public void Remove(T item)
 		{
 			var deletedNode = false;

@@ -6,6 +6,7 @@
 
 namespace Orc.SortedSplitList.C5
 {
+	using System;
 	using System.Collections;
 	using System.Collections.Generic;
 	using global::C5;
@@ -38,10 +39,21 @@ namespace Orc.SortedSplitList.C5
 			get { return false; }
 		}
 
-		public void Add(T item)
+		public IEnumerable<Tuple<T, int>> FindExact(T item)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		void System.Collections.Generic.ICollection<T>.Add(T item)
 		{
 			_sortedArray.Add(item);
 		}
+
+		public bool Add(T item)
+		{
+			return _sortedArray.Add(item);
+		}
+
 
 		public void CopyTo(T[] array, int arrayIndex)
 		{
@@ -57,14 +69,19 @@ namespace Orc.SortedSplitList.C5
 				return false;
 			}
 
-			_sortedArray.Remove(item);
-			return true;
+			return _sortedArray.Remove(item);
+		}
+
+		public bool AllowsReferenceDuplicates
+		{
+			get { return false; }
 		}
 
 		public int BinarySearch(T item)
 		{
 			return _sortedArray.IndexOf(item);
 		}
+
 
 		public bool IsAdvancedBinarySearchSupported
 		{
