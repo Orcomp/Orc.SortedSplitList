@@ -7,8 +7,8 @@
     <ProjectGuid>{12973EC4-236A-44C2-8D38-8AF850D52CE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Orc.SortedSplitList.Test</RootNamespace>
-    <AssemblyName>Orc.SortedSplitList.Test</AssemblyName>
+    <RootNamespace>Orc.SortedSplitList.Tests</RootNamespace>
+    <AssemblyName>Orc.SortedSplitList.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\output\debug\Orc.SortedSplitList.Test\</OutputPath>
+    <OutputPath>..\..\output\debug\Orc.SortedSplitList.Tests\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\output\release\Orc.SortedSplitList.Test\</OutputPath>
+    <OutputPath>..\..\output\release\Orc.SortedSplitList.Tests\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

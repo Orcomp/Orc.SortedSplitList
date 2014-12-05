@@ -114,9 +114,9 @@
     <Compile Include="TestConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Orc.SortedSplitList.Test\Orc.SortedSplitList.Test.csproj">
+    <ProjectReference Include="..\Orc.SortedSplitList.Tests\Orc.SortedSplitList.Tests.csproj">
       <Project>{12973EC4-236A-44C2-8D38-8AF850D52CE5}</Project>
-      <Name>Orc.SortedSplitList.Test</Name>
+      <Name>Orc.SortedSplitList.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Orc.SortedSplitList\Orc.SortedSplitList.csproj">
       <Project>{1f6bd8fc-e883-4c0f-bfed-25841bfde19e}</Project>

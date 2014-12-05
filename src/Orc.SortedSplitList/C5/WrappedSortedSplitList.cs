@@ -8,11 +8,8 @@
 
 namespace Orc.SortedSplitList
 {
-	#region using...
 	using System.Collections.Generic;
 	using C5;
-
-	#endregion
 
 	public class WrappedSortedArray<TSorter, TValue> : ITestOperations<TSorter, TValue>
 	{

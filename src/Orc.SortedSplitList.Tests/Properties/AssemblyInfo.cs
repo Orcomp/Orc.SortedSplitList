@@ -10,9 +10,9 @@ using System.Runtime.InteropServices;
 
 // All other assembly info is defined in SharedAssembly.cs
 
-[assembly: AssemblyTitle("Orc.SortedSplitList")]
-[assembly: AssemblyProduct("Orc.SortedSplitList")]
-[assembly: AssemblyDescription("Orc.SortedSplitList library")]
+[assembly: AssemblyTitle("Orc.SortedSplitList.Tests")]
+[assembly: AssemblyProduct("Orc.SortedSplitList.Tests")]
+[assembly: AssemblyDescription("Orc.SortedSplitList.Tests library")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
