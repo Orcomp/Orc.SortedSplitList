@@ -24,8 +24,7 @@
 	<!--<iconUrl>http://www.catenalogic.com/catel.png</iconUrl>-->
     
     <dependencies>
-      <dependency id="Catel.Core" version="[replaced]" />
-      <dependency id="Catel.MVVM" version="[replaced]" />
+      <dependency id="C5.Intervals" version="[replaced]" />
     </dependencies>
   </metadata>
 </package>
