@@ -72,6 +72,12 @@ namespace Orc.SortedSplitList.C5
 			return _sortedArray.Remove(item);
 		}
 
+		public void RemoveAt(int index)
+		{
+			_sortedArray.Remove(this._sortedArray[index]);
+		}
+
+
 		public bool AllowsReferenceDuplicates
 		{
 			get { return false; }

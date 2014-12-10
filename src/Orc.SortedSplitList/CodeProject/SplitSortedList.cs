@@ -149,6 +149,11 @@ namespace Orc.SortedSplitList
 			return false;
 		}
 
+		public void RemoveAt(int index)
+		{
+			_sortedSplitList.RemoveAt(index);
+		}
+
 		public bool AllowsReferenceDuplicates
 		{
 			get { return _allowsReferenceDuplicates;  }

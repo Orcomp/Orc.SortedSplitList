@@ -73,6 +73,12 @@ namespace Orc.SortedSplitList
 		/// <returns><c>true</c> if success, <c>false</c> otherwise.</returns>
 		bool Add(T item);
 
+		/// <summary>
+		/// Removes the element at the specified index 
+		/// </summary>
+		/// <param name="index">The zero-based index of the element to remove.</param>
+		void RemoveAt(int index);
+
 		#endregion
 	}
 }
