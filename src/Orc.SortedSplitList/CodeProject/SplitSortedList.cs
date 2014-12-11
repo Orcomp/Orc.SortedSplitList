@@ -18,7 +18,7 @@ namespace Orc.SortedSplitList
 		private readonly bool _allowsReferenceDuplicates;
 		private readonly Dictionary<long, T> _ids;
 		private readonly ObjectIDGenerator _idGenerator;
-
+		private IComparer<T> _comparer;
 		#endregion
 
 		#region Constructors
@@ -28,6 +28,7 @@ namespace Orc.SortedSplitList
 			{
 				comparer = Comparer<T>.Default;
 			}
+			_comparer = comparer;
 			_sortedSplitList = new SortedSplitList<T>(comparer);
 			_allowsReferenceDuplicates = allowsReferenceDuplicates;
 			_idGenerator = new ObjectIDGenerator();
@@ -55,23 +56,24 @@ namespace Orc.SortedSplitList
 				yield break;;
 			}
 			
-			// Find first backward:
-			var index = foundIndex;
-			for (; index >= 0; index--)
+			for (var index = foundIndex; index >= 0; index--)
 			{
-				if (!_sortedSplitList[index].Equals(item));
+				var current = _sortedSplitList[index];
+				if (0 != _comparer.Compare(current, item))
 				{
 					break;
 				}
+				yield return new Tuple<T, int>(current, index);
 			}
-			index++;
-			for (; index < _sortedSplitList.Count; index++)
+			
+			for (var index = foundIndex+1; index < _sortedSplitList.Count; index++)
 			{
 				var current = _sortedSplitList[index];
-				if (current.Equals(item));
+				if (0 != _comparer.Compare(current, item))
 				{
-					yield return new Tuple<T, int>(current, index);
-				}				
+					break;
+				}
+				yield return new Tuple<T, int>(current, index);
 			}
 		}
 
@@ -153,6 +155,7 @@ namespace Orc.SortedSplitList
 		{
 			_sortedSplitList.RemoveAt(index);
 		}
+
 
 		public bool AllowsReferenceDuplicates
 		{

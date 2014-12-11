@@ -49,6 +49,11 @@ namespace Orc.SortedSplitList.C5
 			_sortedArray.Add(item);
 		}
 
+		public void RemoveAt(int index)
+		{
+			_sortedArray.Remove(_sortedArray[index]);
+		}
+
 		public bool Add(T item)
 		{
 			return _sortedArray.Add(item);
@@ -71,12 +76,6 @@ namespace Orc.SortedSplitList.C5
 
 			return _sortedArray.Remove(item);
 		}
-
-		public void RemoveAt(int index)
-		{
-			_sortedArray.Remove(this._sortedArray[index]);
-		}
-
 
 		public bool AllowsReferenceDuplicates
 		{
