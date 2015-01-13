@@ -128,7 +128,6 @@
     <Compile Include="..\SolutionAssemblyInfo.cs">
       <Link>Properties\SolutionAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="NUnitBenchmarker\NUnitBenchmarkerDemoTest.cs" />
     <Compile Include="PerformanceTest.cs" />
     <Compile Include="PerformanceTestFactory.cs" />
     <Compile Include="PerformanceTestHelper.cs" />
