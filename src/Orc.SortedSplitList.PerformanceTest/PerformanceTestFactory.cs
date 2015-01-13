@@ -9,6 +9,7 @@ namespace Orc.SortedSplitList.PerformanceTest
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using System.Threading;
 	using C5;
 	using DotNet;
 	using NUnitBenchmarker;
@@ -44,14 +45,14 @@ namespace Orc.SortedSplitList.PerformanceTest
 		#endregion
 
 		#region Methods
-		private IEnumerable<TestConfiguration> AddTestCases()
+		private IEnumerable<TestConfiguration> AddSortedTestCases()
 		{
 			return from implementationType in ImplementationTypes
 			       from size in Sizes
 			       let prepare = new Action<IPerformanceTestCaseConfiguration>(c =>
 			       {
 				       var config = (TestConfiguration) c;
-				       PrepareAdd(size, implementationType, config);
+				       PrepareAddSorted(size, implementationType, config);
 			       })
 			       let run = new Action<IPerformanceTestCaseConfiguration>(c =>
 			       {
@@ -64,7 +65,7 @@ namespace Orc.SortedSplitList.PerformanceTest
 			       })
 			       select new TestConfiguration
 			       {
-				       TestName = "Add",
+				       TestName = "AddSorted",
 				       TargetImplementationType = implementationType,
 				       Identifier = string.Format("{0}", implementationType.GetFriendlyName()),
 				       Size = size,
@@ -74,6 +75,37 @@ namespace Orc.SortedSplitList.PerformanceTest
 				       Divider = size
 			       };
 		}
+
+        private IEnumerable<TestConfiguration> AddRandomTestCases()
+        {
+            return from implementationType in ImplementationTypes
+                   from size in Sizes
+                   let prepare = new Action<IPerformanceTestCaseConfiguration>(c =>
+                   {
+                       var config = (TestConfiguration)c;
+                       PrepareAddRandom(size, implementationType, config);
+                   })
+                   let run = new Action<IPerformanceTestCaseConfiguration>(c =>
+                   {
+                       var config = (TestConfiguration)c;
+                       config.Target = CreateTarget<DateTime, long>(implementationType);
+                       for (var i = 0; i < size; i++)
+                       {
+                           config.Target.Add(config.RandomDateTimes[i], config.RandomLongs[i]);
+                       }
+                   })
+                   select new TestConfiguration
+                   {
+                       TestName = "AddRandom",
+                       TargetImplementationType = implementationType,
+                       Identifier = string.Format("{0}", implementationType.GetFriendlyName()),
+                       Size = size,
+                       Prepare = prepare,
+                       Run = run,
+                       IsReusable = true,
+                       Divider = size
+                   };
+        }
 
 		private IEnumerable<TestConfiguration> RemoveTestCases()
 		{
@@ -135,7 +167,34 @@ namespace Orc.SortedSplitList.PerformanceTest
 			       };
 		}
 
-		private void PrepareAdd(int size, Type type, TestConfiguration config)
+        private IEnumerable<TestConfiguration> EnumerateTestCases()
+        {
+            return from implementationType in ImplementationTypes
+                   from size in Sizes
+                   let prepare = new Action<IPerformanceTestCaseConfiguration>(c =>
+                   {
+                       var config = (TestConfiguration)c;
+                       PrepareSearch(size, implementationType, config);
+                   })
+                   let run = new Action<IPerformanceTestCaseConfiguration>(c =>
+                   {
+                       var config = (TestConfiguration)c;
+                       config.Target.Enumerate();
+                   })
+                   select new TestConfiguration
+                   {
+                       TestName = "Enumerate",
+                       TargetImplementationType = implementationType,
+                       Identifier = string.Format("{0}", implementationType.GetFriendlyName()),
+                       Size = size,
+                       Prepare = prepare,
+                       Run = run,
+                       IsReusable = true,
+                       Divider = size
+                   };
+        }
+
+		private void PrepareAddRandom(int size, Type type, TestConfiguration config)
 		{
 			config.RandomLongs = new long[size];
 			config.RandomDateTimes = new DateTime[size];
@@ -147,6 +206,18 @@ namespace Orc.SortedSplitList.PerformanceTest
 				config.RandomDateTimes[i] = new DateTime(_offset + permutation[i]);
 			}
 		}
+
+        private void PrepareAddSorted(int size, Type type, TestConfiguration config)
+        {
+            config.RandomLongs = new long[size];
+            config.RandomDateTimes = new DateTime[size];
+
+            for (var i = 0; i < size; i++)
+            {
+                config.RandomLongs[i] = i;
+                config.RandomDateTimes[i] = new DateTime(_offset + i);
+            }
+        }
 
 		private void PrepareRemove(int size, Type type, TestConfiguration config)
 		{
